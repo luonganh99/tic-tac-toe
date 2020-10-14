@@ -92,6 +92,7 @@ ul {
 
 .bold-text {
     font-weight: bold;
+    color: #999;
 }
 
 .highlight {
@@ -104,7 +105,7 @@ ul {
     padding: 5px;
     color: rgb(255, 255, 255);
     width: 50px;
-    transition: all 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
 }
 
 .btn:hover {

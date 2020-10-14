@@ -67,7 +67,7 @@ const Game: React.FC = () => {
                         <Board onClick={(i) => handleCheckClick(i)} currentSquare={history[stepNumber].squares}  wonLine={wonLine} />
                     </div>
                     <div className='game-info'>
-                        <MoveList history={history} onJumpToClick={handleJumpToClick} isAscending={isAscending} />
+                        <MoveList history={history} stepNumber={stepNumber} onJumpToClick={handleJumpToClick} isAscending={isAscending} />
                     </div>
                 </div>
         </div>
