@@ -67,6 +67,30 @@ ul {
     font-weight: bold;
 }
 
+.game-size {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    width: 200px;
+}
+
+.add,
+.subtract {
+    background-color: rgb(126, 235, 83);
+    padding: 7px;
+    border: 1px solid rgb(63, 248, 109);
+    width: 60px;
+    transition: all 0.2s ease-in-out;
+}
+
+.add:hover,
+.subtract:hover {
+    cursor: pointer;
+    opacity: 0.9;
+    transform: scale(1.2);
+}
+
 .game-status {
     font-style: italic;
     margin-bottom: 15px;
@@ -105,7 +129,7 @@ ul {
     padding: 5px;
     color: rgb(255, 255, 255);
     width: 50px;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.2s ease-in-out;
 }
 
 .btn:hover {
@@ -126,4 +150,5 @@ ul {
 
 .moves {
     list-style: none;
+    min-width: 200px;
 }

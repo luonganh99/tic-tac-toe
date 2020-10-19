@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import Board from './Board';
 import MoveList from './MoveList';
 
@@ -8,7 +8,8 @@ type History =  {
 }
 
 const Game: React.FC = () => {
-    const [history, setHistory] = useState<History[]>([{squares: Array(9).fill(null), currentPosition: null}]);
+    const [size, setSize] = useState(3);
+    const [history, setHistory] = useState<History[]>([{squares: Array(3 * 3).fill(null), currentPosition: null}]);
     const [xIsNext, setXIsNext] = useState(true);
     const [stepNumber, setStepNumber] = useState(0);
     const [isAscending, setIsAscending] = useState(true);
@@ -29,6 +30,7 @@ const Game: React.FC = () => {
         }
 
     }, [history, stepNumber, xIsNext]);
+
 
     const handleCheckClick = (i: number): void => {
         const updatedHistory = history.slice(0, stepNumber + 1);
@@ -54,17 +56,42 @@ const Game: React.FC = () => {
     const handleSortClick = () => {
         setIsAscending(!isAscending);
     }
-    
+
+    const handleAddSizeClick = () => {
+        const updatedSize = size + 1;
+        setSize(updatedSize);
+        setHistory([{squares: Array(updatedSize * updatedSize).fill(null), currentPosition: null}]);
+        setStepNumber(0);
+        setIsAscending(false);
+        setWonLine([]);
+        setXIsNext(true);
+    }
+
+    const handleSubtractSizeClick = () => {
+        const updatedSize = size > 3 ? size - 1 : 3;
+        setSize(updatedSize);
+        setHistory([{squares: Array(updatedSize * updatedSize).fill(null), currentPosition: null}]);
+        setStepNumber(0);
+        setIsAscending(false);
+        setWonLine([]);
+        setXIsNext(true);
+    }
+
     return (
         <div className='game'>
                 <div className='game-title'>Tic Tac Toe</div>
+                <div className="game-size">
+                    <button className='subtract' onClick={handleSubtractSizeClick}>-</button>
+                    <div className='size'>{size}</div>
+                    <button className='add' onClick={handleAddSizeClick}>+</button>
+                </div>
                 <div className="game-status">{status}</div>
                 <div className='game-btn'>
                     <button className='btn' onClick={() => handleSortClick()}>Sort</button>
                 </div>
                 <div className="game-container">
                     <div className='game-board'>
-                        <Board onClick={(i) => handleCheckClick(i)} currentSquare={history[stepNumber].squares}  wonLine={wonLine} />
+                        <Board onClick={(i) => handleCheckClick(i)} currentSquare={history[stepNumber].squares} wonLine={wonLine} size={size} />
                     </div>
                     <div className='game-info'>
                         <MoveList history={history} stepNumber={stepNumber} onJumpToClick={handleJumpToClick} isAscending={isAscending} />
